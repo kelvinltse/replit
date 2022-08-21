@@ -6,7 +6,6 @@ export default function App() {
     <main>
       <Counter />
     </main>
-
   )
 }
 
@@ -18,47 +17,32 @@ class Counter extends Component {
     };
   }
 
-  incrementCounter() {
-    var newCount = this.state.count + 1;
-    // newCount++;
-    this.setState({ count: newCount });
-    console.log("increase");
-  }
-
-  decrementCounter() {
-    var newCount = this.state.count;
-    newCount--;
-    this.setState({ count: newCount });
-    console.log("decrease");
+  changeCounter(button) {
+    var count = this.state.count;
+    if (button == "plus") {
+      count++;
+    } else {
+      count--;
+    }
+    this.setState({count: count});   
   }
 
   render() {
     return (
       <div>
         Current Count: {this.state.count}
-        <PlusButton onBoop = {() => this.incrementCounter()}/>
-        <MinusButton onBoop = {() => this.decrementCounter()}/>
+        <Button direction="+" onBoop = {() => this.changeCounter("plus")}/>
+        <Button direction="-"onBoop = {() => this.changeCounter("minus")}/>
       </div>
     );
   }
 }
 
-class PlusButton extends Component {
+class Button extends Component {
   render(props) {
     return (
-      <button onClick={this.props.onBoop}></button>
-      );
+      <button onClick = {this.props.onBoop}>{this.props.direction}</button>
+    )
   }
 }
-
-class MinusButton extends Component {
-  render(props) {
-    return (
-      <button onClick={this.props.onBoop}></button>
-    );
-  }
-}
-
-
-
 
